@@ -15,8 +15,8 @@ with open('quotes_data_tmp.json', 'w') as jf:
             for quote_number, quote in enumerate(all_quotes, 1):
                 print(f'\tStart scraping quote #{quote_number} from {len(all_quotes)}')
                 quote_text = quote.select_one('span[class=text]').text[1:-1]
-                quote_author = quote.select_one('span small').text
-                quotes_tags = [tag.text for tag in quote.select('div[class=tags] a[class=tag]')]
+                quote_author = quote.select_one('small[class=author]').text
+                quotes_tags = [tag.text for tag in quote.select('a[class=tag]')]
                 quote_dict = {
                     'quote_text': quote_text,
                     'quote_author': quote_author,

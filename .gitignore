@@ -1,2 +1,10 @@
 
 .idea/
+
+quotes/quotes/spiders/__pycache__/
+
+quotes/quotes/__pycache__/
+
+books/books/
+
+books/
