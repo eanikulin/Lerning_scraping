@@ -11,7 +11,7 @@ class QuotesDetailSpider(CrawlSpider):
     item = QuotesItem()
 
     rules = (
-        Rule(LinkExtractor(restrict_xpaths="//li[@class='next']/a"), callback='parse_main', follow=True),
+        # Rule(LinkExtractor(restrict_xpaths="//li[@class='next']/a"), callback='parse_main', follow=True),
         Rule(LinkExtractor(restrict_xpaths="//div[@class='quote']/span[@class='text']/following-sibling::span/a"), callback='parse_about', follow=True),
     )
 
@@ -26,8 +26,8 @@ class QuotesDetailSpider(CrawlSpider):
         #     }
 
         for quote in quotes:
-            item['quote_text'] = quote.xpath(".//span[@class='text']/text()").get()[1:-1],
-            item['quotes_tags'] = [tag.get() for tag in quote.xpath(".//a[@class='tag']/text()")],
+            item['quote_text'] = quote.xpath('./span[@class="text"]/text()').extract_first()[1:-1],
+            item['quotes_tags'] = quote.xpath('.//div[@class="tags"]/a[@class="tag"]/text()').extract()
             yield item
 
 
